@@ -29,4 +29,4 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: |
-            ghcr.io/${{ github.GITHUB_REPOSITORY }}:${{ env.RELEASE_VERSION }}
+            ghcr.io/${{ github.REPOSITORY }}:${{ env.RELEASE_VERSION }}
