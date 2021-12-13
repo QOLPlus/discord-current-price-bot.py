@@ -20,7 +20,7 @@ class Scheduler(disnake.Client):
     async def on_connect(self):
         self.fetch_price.start()
     
-    @tasks.loop(seconds=os.getenv('INTERVAL') or 15)
+    @tasks.loop(seconds=int(os.getenv('INTERVAL') or 15))
     async def fetch_price(self):
         await self.wait_until_ready()
 
