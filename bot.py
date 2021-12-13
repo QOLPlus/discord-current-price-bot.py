@@ -20,20 +20,25 @@ class Scheduler(disnake.Client):
     async def on_connect(self):
         self.fetch_price.start()
     
-    @tasks.loop(seconds=3)
+    @tasks.loop(seconds=os.getenv('INTERVAL') or 15)
     async def fetch_price(self):
         await self.wait_until_ready()
 
         r = requests.get(f"http://quotation-api.dunamu.com/v1/recent/securities?shortCodes={self.short_code}")
         try:
             data = r.json()[0]
-            if self.user.display_name != data['name']:
-                await self.user.edit(username=data['name'])
 
-            if self.last_price != data['tradePrice']:
-                activity = disnake.Game(name=data['tradePrice'])
-                await self.change_presence(activity=activity)
-                self.last_price = data['tradePrice']
+            stock_name = data['name']
+            display_name = f"[-] {stock_name}"
+            trade_price = data['tradePrice']
+            price_detail = f"({round(data['signedChangeRate'] * 100, 2)}%)"
+
+            if self.user.display_name != display_name:
+                await self.user.edit(username=display_name)
+
+            if self.last_price != trade_price:
+                await self.change_presence(activity=disnake.Game(name=f"💰 {trade_price} {price_detail}"))
+                self.last_price = trade_price
 
         except Exception as e:
             print(e)
