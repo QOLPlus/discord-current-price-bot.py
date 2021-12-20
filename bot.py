@@ -29,7 +29,7 @@ class Scheduler(disnake.Client):
             data = r.json()[0]
 
             stock_name = data['name']
-            display_name = f"[-] {stock_name}"
+            display_name = f"{stock_name} ({self.short_code})"
             trade_price = data['tradePrice']
             price_detail = f"({round(data['signedChangeRate'] * 100, 2)}%)"
 
