@@ -8,6 +8,7 @@ authors = ["LEE Jaeyoung <jaeyoung@monodiary.net>"]
 python = "3.10.0"
 requests = "^2.26.0"
 disnake = "^2.2.2"
+requests-html = "^0.10.0"
 
 [tool.poetry.dev-dependencies]
 
