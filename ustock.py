@@ -41,7 +41,7 @@ class Scheduler(disnake.Client):
                 await self.user.edit(username=display_name)
 
             if self.last_price != trade_price:
-                await self.change_presence(activity=disnake.Game(name=f"💰 {trade_price} {price_detail}"))
+                await self.change_presence(activity=disnake.Game(name=f"💰 {trade_price:,} {price_detail}"))
                 self.last_price = trade_price
 
         except Exception as e:
