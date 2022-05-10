@@ -24,7 +24,7 @@ class Scheduler(disnake.Client):
     async def fetch_price(self):
         await self.wait_until_ready()
 
-        r = requests.get(f"http://quotation-api.dunamu.com/v1/recent/securities?shortCodes={self.short_code}")
+        r = requests.get(f"https://quotation-api-cdn.dunamu.com/v1/recent/securities?shortCodes={self.short_code}")
         try:
             data = r.json()[0]
 
